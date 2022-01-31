@@ -10,6 +10,7 @@ FocusMuscle的後台管理系統
 包含一個initFirebase.js
 將取得的資料庫連結及其他資料填入 並導出getDatabase()方法
 ```
+![image](https://github.com/oz841119/focus-muscle-admin/blob/main/ReadmeImage/key.jpg)
 ## Project setup
 ```
 npm install
