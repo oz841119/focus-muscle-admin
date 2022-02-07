@@ -55,6 +55,11 @@ export default {
     },
     
     approved() {
+      console.log(this.multipleSelection);
+      if(this.multipleSelection.length == 0) {
+        this.$message('您沒有列表勾選');
+        return
+      }
       this.loading = true
       for(let i=0 ; i<this.multipleSelection.length ; i++) {
         const newAction = this.multipleSelection[i]
@@ -68,9 +73,12 @@ export default {
     },
 
     deleteData() {
+      if(this.multipleSelection.length == 0) {
+        this.$message('您沒有列表勾選');
+        return
+      }
       this.loading = true
       let nowKey = ''
-
       for(let i=0 ; i<this.multipleSelection.length ; i++) {
         for (let prop in this.databaseData) {
           if(this.databaseData[prop] == this.multipleSelection[i]) {
@@ -79,6 +87,7 @@ export default {
             remove(ref(db, `suggestions/${nowKey}`))
           }
         }
+        console.log(this);
         this.successMsg('刪除成功')
       }
       this.getSuggestions()
