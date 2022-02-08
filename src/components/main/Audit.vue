@@ -1,9 +1,10 @@
 <template>
+  <!-- 按扭區 -->
   <div class="wrap">
     <div class="buttonWrap">
       <el-button class="el-icon--right" @click="getSuggestions()" type="primary" size="mini">讀取<i class="el-icon-sort-down el-icon--right"></i></el-button>
       <div class="buttonWrapRight">
-        <el-button class="el-icon--right" @click="deleteData()" type="danger" size="mini">刪除(構建中)<i class="el-icon-delete el-icon--right"></i></el-button>
+        <el-button class="el-icon--right" @click="deleteData()" type="danger" size="mini">刪除<i class="el-icon-delete el-icon--right"></i></el-button>
         <el-button class="el-icon--right"  @click="approved()" type="success" size="mini">審核<i class="el-icon-check el-icon--right"></i></el-button>
       </div>
     </div>
@@ -20,42 +21,39 @@
 
 <script>
 import db from '../../firebase/initFirebase'
-import {ref, get, child, update, push, remove} from "firebase/database";
+import {ref, child, update, push, remove} from "firebase/database";
 
+import firebaseAPI from '../../mixins/firebaseAPI.js'
 export default {
+  mixins: [firebaseAPI],
   data() {
     return {
-      databaseData: {},
+      databaseData: {}, // 數據庫回傳的資料
       tableData: [],
-      multipleSelection: [],
+      multipleSelection: [], // 列表中勾選的選項
       loading: false
     }
   },
   methods: {
     getSuggestions() {
       this.loading = true
-      const dbRef = ref(db)
-      get(child(dbRef, 'suggestions'))
-      .then((snapshot) => {
+      this.mixinGetData('suggestions', (snapshot) => {
         if(snapshot.exists()) {
           this.databaseData = snapshot.val()
           this.tableData = Object.values(this.databaseData)
           this.loading = false
-        } else {
+        }else {
           this.noHasDataMsg()
           this.tableData = []
           this.loading = false
         }
-      })
-      .catch((error) => {
-        this.errorMsg()
-        console.log(error);
-        this.loading = false
+      },(error) => {
+          this.errorMsg()
+          this.loading = false
       })
     },
     
     approved() {
-      console.log(this.multipleSelection);
       if(this.multipleSelection.length == 0) {
         this.$message('您沒有列表勾選');
         return
@@ -88,8 +86,8 @@ export default {
           }
         }
         console.log(this);
-        this.successMsg('刪除成功')
       }
+      this.successMsg('刪除成功')
       this.getSuggestions()
     },
 

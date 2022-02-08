@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 import Index from '../components/main/Index.vue'
 import Audit from '../components/main/Audit.vue'
+import List from '../components/main/List.vue'
+
 Vue.use(VueRouter);
 
 
@@ -16,12 +18,20 @@ const routes = [
     }
   },
   {
-    path: '/Audit',
+    path: '/audit',
     name: 'Audit',
     component: Audit,
     meta: {
       title: "審核 - FocusMuscle後台管理系統",
       // requiresAuth: false
+    }
+  },
+  {
+    path: '/list',
+    name: List,
+    component: List,
+    meta: {
+      title: "列表 - FocusMuscle後台管理系統"
     }
   }
 ]
