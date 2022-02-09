@@ -34,11 +34,12 @@ export default {
     getActions() {
       this.loading = true
       this.mixinGetData('actions', (snapshot) => {
-        if(snapshot.val()) {
+        if(snapshot.val()) { // snapshot.val(): firebase方法 當請求成功且數據庫有數據時會返回數據
           console.log('成功');
-          this.databaseData = snapshot.val()
-          this.relayData = Object.values(this.databaseData)
+          this.databaseData = snapshot.val() // 
+          this.relayData = Object.values(this.databaseData) // 資料處理中繼
           for(let i = 0 ; i<this.relayData.length ; i++) {
+            // 若沒有actions的話 變數manyActions在Object.values取值將會失敗並觸發catch 所以需要判斷是否為undefined來跳過本次迴圈
             if(this.relayData[i].actions === undefined) {
               continue
             }
@@ -56,7 +57,7 @@ export default {
         }
       }, (error) => {
           console.log('失敗');
-          console.log(error);
+          console.log(error); // error為firebase傳入的失敗原因
           this.errorMsg()
           this.loading = false
       })
