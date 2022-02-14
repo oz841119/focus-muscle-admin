@@ -4,7 +4,6 @@
       <el-button class="el-icon--right" @click="getActions()" type="primary" size="mini">讀取<i class="el-icon-sort-down el-icon--right"></i></el-button>
       <div class="buttonWrapRight">
         <el-button class="el-icon--right" type="danger" size="mini">刪除<i class="el-icon-delete el-icon--right"></i></el-button>
-        <el-button class="el-icon--right" type="success" size="mini">審核<i class="el-icon-check el-icon--right"></i></el-button>
       </div>
     </div>
     <el-row>
@@ -89,10 +88,9 @@ export default {
   },
   
   watch: {
-    searchText: {
+    searchText: { // 監聽搜索框得到相對應的列表
       handler: function() {
         let reg = new RegExp(this.searchText);
-        // this.tableData = this.originalTableData // 當輸入框的時更新時 將tableData做一次初始化
         this.tableData = this.originalTableData.filter((item) => reg.test(item.action))
       }
     }
