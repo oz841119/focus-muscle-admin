@@ -7,6 +7,11 @@
         <el-button class="el-icon--right" type="success" size="mini">審核<i class="el-icon-check el-icon--right"></i></el-button>
       </div>
     </div>
+    <el-row>
+      <el-col :span="4">
+        <el-input class="mt8" v-model="searchText" placeholder="在列表中搜尋"></el-input>
+        </el-col>
+    </el-row>
     <!-- 表格區 -->
     <el-table class="mt8" :data="tableData" ref="multipleTable" @selection-change="handleSelectionChange" v-loading="isLoading">
       <el-table-column type="selection"></el-table-column>
@@ -27,7 +32,9 @@ export default {
       isLoading: false,
       databaseData: {}, // 數據庫回傳的資料
       tableData: [],
+      originalTableData: [], // 原始的table資料 搜索功能時使用  ??- 深淺拷貝問題 -?? 
       multipleSelection: [], // 列表中勾選的選項
+      searchText: ''
     }
   },
   methods: {
@@ -49,6 +56,7 @@ export default {
               this.tableData.push({name: this.relayData[i].name, action: manyActions[j]})
             }
           }
+          this.originalTableData = this.tableData
           this.loading = false
         }else {
           this.noHasDataMsg()
@@ -64,9 +72,7 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val
-      console.log(this.multipleSelection);
     },
-
     successMsg(msg) {
       this.$message({
         message: msg,
@@ -79,6 +85,16 @@ export default {
         message: '數據獲取失敗',
         type: 'error'
       })
+    },
+  },
+  
+  watch: {
+    searchText: {
+      handler: function() {
+        let reg = new RegExp(this.searchText);
+        // this.tableData = this.originalTableData // 當輸入框的時更新時 將tableData做一次初始化
+        this.tableData = this.originalTableData.filter((item) => reg.test(item.action))
+      }
     }
   }
 }
