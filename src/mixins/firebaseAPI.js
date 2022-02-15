@@ -11,9 +11,6 @@ export default {
     mixinGetData(target, successFun, failFun) {
       const dbRef = ref(db)
       get(child(dbRef, target)).then((snapshot) => {successFun(snapshot)}).catch((error) => failFun(error))
-      // .catch((eroor) => failFun)
     },
-
-    
   }
 }

@@ -11,6 +11,13 @@ FocusMuscle的後台管理系統
 將取得的資料庫連結及其他資料填入 並導出getDatabase()方法
 ```
 ![image](https://github.com/oz841119/focus-muscle-admin/blob/main/ReadmeImage/key.jpg)
+
+## 已知問題
+```
+1. 列表頁面重複讀取時會直接累積
+2. 刪除方法需重寫
+
+```
 ## Project setup
 ```
 npm install

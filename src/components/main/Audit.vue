@@ -81,7 +81,6 @@ export default {
         for (let prop in this.databaseData) {
           if(this.databaseData[prop] == this.multipleSelection[i]) {
             nowKey = prop
-            console.log(nowKey);
             remove(ref(db, `suggestions/${nowKey}`))
           }
         }
