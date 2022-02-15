@@ -40,6 +40,8 @@ export default {
   },
   methods: {
     getActions() { 
+      this.tableData = [] // 初始化一次tableData
+      this.searchText = ''  // 初始化一次searchText 避免重新讀取時searchText有內容而導致的無更新對應搜索
       this.loading = true
       this.mixinGetData('actions', (snapshot) => {
         if(snapshot.val()) { // snapshot.val(): firebase方法 當請求成功且數據庫有數據時會返回數據
@@ -55,7 +57,7 @@ export default {
               this.tableData.push({name: this.relayData[i].name, action: manyActions[j]})
             }
           }
-          this.originalTableData = this.tableData
+          this.originalTableData = this.tableData // 原始的table資料 搜索功能時使用  ??- 深淺拷貝問題 -?? 
           this.loading = false
         }else {
           this.noHasDataMsg()
@@ -96,7 +98,6 @@ export default {
       this.isLoading = true
       let databaseDataArr = Object.values(this.databaseData)
       for(let i = 0 ; i<this.multipleSelection.length ; i++) {
-
         for(let j = 0 ; j<databaseDataArr.length ; j++) { // 伺服器回傳的物件取value
           if(databaseDataArr[j].name == this.multipleSelection[i].name) {
             // let databaseDataActions = Object.values(databaseDataArr[j]) // 得到有相同部位的訓練動作數組
@@ -105,12 +106,12 @@ export default {
                 for(let path in this.databaseData) {
                   if(this.databaseData[path].name == this.multipleSelection[i].name) {
                     remove(ref(db, `actions/${path}/actions/${item}`))
+                    break
                   }
                 }
-                continue
+                break
               }
             }
-            continue
           }
         } 
       }
