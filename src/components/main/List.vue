@@ -104,7 +104,7 @@ export default {
               if(databaseDataArr[j].actions[key] == this.multipleSelection[i].action) {
                 for(let path in this.databaseData) { // 查找流水key對應的上層路徑(也為key)
                   if(this.databaseData[path].name == this.multipleSelection[i].name) {
-                    remove(ref(db, `actions/${path}/actions/${item}`))
+                    remove(ref(db, `actions/${path}/actions/${key}`))
                     break  // 最外層每次遍歷只會執行一次刪除 刪除後就可進行退出 不必往下查找
                   }
                 }
