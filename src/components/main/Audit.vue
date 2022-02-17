@@ -2,10 +2,10 @@
   <!-- 按扭區 -->
   <div class="wrap">
     <div class="buttonWrap">
-      <el-button class="el-icon--right" @click="getSuggestions()" type="primary" size="mini">讀取<i class="el-icon-sort-down el-icon--right"></i></el-button>
+      <el-button class="el-icon--right" @click="getSuggestions('數據獲取成功')" type="primary" size="mini">讀取<i class="el-icon-sort-down el-icon--right"></i></el-button>
       <div class="buttonWrapRight">
-        <el-button class="el-icon--right" @click="deleteData()" type="danger" size="mini">刪除<i class="el-icon-delete el-icon--right"></i></el-button>
-        <el-button class="el-icon--right"  @click="approved()" type="success" size="mini">審核<i class="el-icon-check el-icon--right"></i></el-button>
+        <el-button class="el-icon--right" @click="deleteData('刪除成功')" type="danger" size="mini">刪除<i class="el-icon-delete el-icon--right"></i></el-button>
+        <el-button class="el-icon--right"  @click="approved('審核成功')" type="success" size="mini">審核<i class="el-icon-check el-icon--right"></i></el-button>
       </div>
     </div>
     <!-- 表格區 -->
@@ -35,25 +35,27 @@ export default {
     }
   },
   methods: {
-    getSuggestions() {
+    getSuggestions(sucMsg) {
       this.loading = true
       this.mixinGetData('suggestions', (snapshot) => {
         if(snapshot.exists()) {
           this.databaseData = snapshot.val()
           this.tableData = Object.values(this.databaseData)
           this.loading = false
+          this.successMsg(sucMsg)
         }else {
           this.noHasDataMsg()
           this.tableData = []
           this.loading = false
         }
       },(error) => {
+          console.warn(error);
           this.errorMsg()
           this.loading = false
       })
     },
     
-    approved() {
+    approved(sucMsg) {
       if(this.multipleSelection.length == 0) {
         this.$message('您沒有列表勾選');
         return
@@ -65,12 +67,14 @@ export default {
         const updates = {}
         updates[`actions/${newAction.muscleName}/actions/${newKey}`] = newAction.action
         update(ref(db), updates) 
-        this.successMsg('審核成功')
-        this.deleteData()
+        // this.successMsg(sucMsg)
+        // this.deleteData()
       }
+      this.successMsg(sucMsg)
+      this.deleteData()
     },
 
-    deleteData() {
+    deleteData(errMsg) {
       if(this.multipleSelection.length == 0) {
         this.$message('您沒有列表勾選');
         return
@@ -84,17 +88,16 @@ export default {
             remove(ref(db, `suggestions/${nowKey}`))
           }
         }
-        console.log(this);
       }
-      this.successMsg('刪除成功')
-      this.getSuggestions()
+      if(errMsg) this.successMsg(errMsg)
+      this.getSuggestions('數據重新獲取成功')
     },
 
     // 當勾選項目時觸發，顯示勾選中的項目各值 Array
     handleSelectionChange(val) {
       this.multipleSelection = val
-      console.log(this.multipleSelection);
     },
+
     noHasDataMsg() {
       this.$message('目前沒有數據提供');
     },
@@ -108,7 +111,7 @@ export default {
 
     errorMsg() {
       this.$message({
-        message: '數據獲取失敗',
+        message: '數據獲取失敗，請確認網路是否正常或詢問服務商',
         type: 'error'
       })
     }

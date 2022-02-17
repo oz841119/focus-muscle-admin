@@ -12,10 +12,10 @@ FocusMuscle的後台管理系統
 ```
 ![image](https://github.com/oz841119/focus-muscle-admin/blob/main/ReadmeImage/key.jpg)
 
-## 已知問題
+## 修正問題
 ```
-1. 列表頁面重複讀取時會直接累積
-2. 刪除方法需重寫
+1. 0217 - 修正了審核時產生重複多次訊息的BUG
+2. 0217 - 修正了一些複用方法時應該產生的對應訊息框
 
 ```
 ## Project setup

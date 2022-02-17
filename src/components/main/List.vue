@@ -98,15 +98,14 @@ export default {
       this.isLoading = true
       let databaseDataArr = Object.values(this.databaseData)
       for(let i = 0 ; i<this.multipleSelection.length ; i++) {
-        for(let j = 0 ; j<databaseDataArr.length ; j++) { // 伺服器回傳的物件取value
+        for(let j = 0 ; j<databaseDataArr.length ; j++) {
           if(databaseDataArr[j].name == this.multipleSelection[i].name) {
-            // let databaseDataActions = Object.values(databaseDataArr[j]) // 得到有相同部位的訓練動作數組
-            for (let item in databaseDataArr[j].actions) {
-              if(databaseDataArr[j].actions[item] == this.multipleSelection[i].action) {
-                for(let path in this.databaseData) {
+            for (let key in databaseDataArr[j].actions) { // 查找這個動作名稱對應的流水key
+              if(databaseDataArr[j].actions[key] == this.multipleSelection[i].action) {
+                for(let path in this.databaseData) { // 查找流水key對應的上層路徑(也為key)
                   if(this.databaseData[path].name == this.multipleSelection[i].name) {
                     remove(ref(db, `actions/${path}/actions/${item}`))
-                    break
+                    break  // 最外層每次遍歷只會執行一次刪除 刪除後就可進行退出 不必往下查找
                   }
                 }
                 break
