@@ -14,7 +14,7 @@ const routes = [
     name: 'Index',
     component: Index,
     meta: {
-      title: "FocusMuscle後台管理系統",
+      title: "後台管理系統 - FocusMuscle",
     }
   },
   {

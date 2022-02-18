@@ -1,8 +1,14 @@
 <template>
   <div>
     <el-container class="layout">
-      <el-header>
-        <span>FocusMuscleAdmin</span>
+      <el-header height="60px">
+        <div class="title">
+          <span class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg" alt=""></span>
+          <div class="titleText">
+            <span>FocusMuscle</span>
+            <span>ADMIN</span>
+          </div>
+        </div>
       </el-header>
       <el-container>
         <el-aside>
@@ -37,12 +43,34 @@ export default {
   .el-header {
     display: flex;
     align-items: center;
-    background-color: rgb(71, 118, 212);
+    background-color: rgb(30,40,50);
+    color: #fff;
   }
 
   .el-aside {
     flex: 1;
-    background-color: rgb(202, 221, 255);
+    background-color: rgb(40,50,60);
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .titleText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .imgWrap {
+    height: 60%;
+    margin-right: 6px;
+  }
+  
+  .logoIMG {
+    height: 100%;
   }
 
   .el-main {

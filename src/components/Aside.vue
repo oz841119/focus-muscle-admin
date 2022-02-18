@@ -23,7 +23,7 @@ export default {
   }
 
   .link {
-    color: #D45124
+    color: #fff
   }
 
   .link:nth-child(2) {
