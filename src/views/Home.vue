@@ -2,13 +2,15 @@
   <div>
     <el-container class="layout">
       <el-header height="60px">
-        <div class="title">
-          <span class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg" alt=""></span>
-          <div class="titleText">
-            <span>FocusMuscle</span>
-            <span>ADMIN</span>
+        <router-link to="/">
+          <div class="title">
+            <span class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg" alt=""></span>
+            <div class="titleText">
+              <span>FocusMuscle</span>
+              <span>ADMIN</span>
+            </div>
           </div>
-        </div>
+        </router-link>
       </el-header>
       <el-container>
         <el-aside>
