@@ -97,7 +97,7 @@ export default {
 
     formatDate() { // 將數據中的date格式化
       for(let i = 0 ; i<this.tableData.length ; i++) {
-        this.tableData[i].date = dayjs(this.tableData[i].date).format('YYYY/MM/DD - HH點 mm分 ss秒')
+        this.tableData[i].date = dayjs(this.tableData[i].date).format('YYYY/MM/DD HH:mm:ss')
       }
     },
 
