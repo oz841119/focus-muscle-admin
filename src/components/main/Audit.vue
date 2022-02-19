@@ -22,8 +22,9 @@
 <script>
 import db from '../../firebase/initFirebase'
 import {ref, child, update, push, remove} from "firebase/database";
-
+import dayjs from 'dayjs'
 import firebaseAPI from '../../mixins/firebaseAPI.js'
+
 export default {
   mixins: [firebaseAPI],
   data() {
@@ -43,6 +44,7 @@ export default {
           this.tableData = Object.values(this.databaseData)
           this.loading = false
           this.successMsg(sucMsg)
+          this.formatDate()
         }else {
           this.noHasDataMsg()
           this.tableData = []
@@ -91,6 +93,12 @@ export default {
       }
       if(errMsg) this.successMsg(errMsg)
       this.getSuggestions('數據重新獲取成功')
+    },
+
+    formatDate() { // 將數據中的date格式化
+      for(let i = 0 ; i<this.tableData.length ; i++) {
+        this.tableData[i].date = dayjs(this.tableData[i].date).format('YYYY/MM/DD - HH點 mm分 ss秒')
+      }
     },
 
     // 當勾選項目時觸發，顯示勾選中的項目各值 Array
