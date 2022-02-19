@@ -65,6 +65,8 @@ export default {
     flex-direction: column;
     align-items: flex-end;
     font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-style: italic;
   }
 
   .imgWrap {
