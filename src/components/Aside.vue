@@ -1,6 +1,5 @@
 <template>
-<!-- 0218 響應當前路由的index未解決 -->
-  <el-menu background-color="rgb(40,50,60)" text-color="#fff" router default-active="/list">
+  <el-menu background-color="rgb(40,50,60)" text-color="#fff" router :default-active=this.$route.path>
     <el-menu-item index="/list">
       <i class="el-icon-caret-right"></i>動作列表
     </el-menu-item>
@@ -12,7 +11,9 @@
 
 <script>
 export default {
-
+  mounted() {
+    console.log(this.$route.path);
+  }
 }
 </script>
 
