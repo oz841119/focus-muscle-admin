@@ -4,7 +4,7 @@
       <el-header height="60px">
         <router-link to="/">
           <div class="title">
-            <span class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg" alt=""></span>
+            <div class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg"></div>
             <div class="titleText">
               <span>FocusMuscle</span>
               <span>ADMIN</span>
@@ -58,22 +58,23 @@ export default {
     display: flex;
     align-items: center;
     height: 100%;
-    font-family: 'Work Sans', sans-serif;
   }
 
   .titleText {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    font-family: 'Work Sans', sans-serif;
   }
 
   .imgWrap {
-    height: 60%;
+    display: flex;
+    width: 48px;
     margin-right: 6px;
   }
   
   .logoIMG {
-    height: 100%;
+    width: 100%;
   }
 
   .el-main {
