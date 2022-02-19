@@ -42,9 +42,9 @@ export default {
         if(snapshot.exists()) {
           this.databaseData = snapshot.val()
           this.tableData = Object.values(this.databaseData)
-          this.loading = false
           this.successMsg(sucMsg)
           this.formatDate()
+          this.loading = false
         }else {
           this.noHasDataMsg()
           this.tableData = []

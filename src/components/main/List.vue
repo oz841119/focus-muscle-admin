@@ -42,7 +42,8 @@ export default {
     getActions() { 
       this.tableData = [] // 初始化一次tableData
       this.searchText = ''  // 初始化一次searchText 避免重新讀取時searchText有內容而導致的無更新對應搜索
-      this.loading = true
+      this.isLoading = true
+      console.log(this.isLoading);
       this.mixinGetData('actions', (snapshot) => {
         if(snapshot.val()) { // snapshot.val(): firebase方法 當請求成功且數據庫有數據時會返回數據
           this.databaseData = snapshot.val() // 
@@ -58,16 +59,17 @@ export default {
             }
           }
           this.originalTableData = this.tableData // 原始的table資料 搜索功能時使用  ??- 深淺拷貝問題 -?? 
-          this.loading = false
+          this.successMsg('數據讀取成功')
+          this.isLoading = false
         }else {
           this.noHasDataMsg()
           this.tableData = []
-          this.loading = false
+          this.isLoading = false
         }
       }, (error) => {
           console.warn(error); // error為firebase傳入的失敗原因
           this.errorMsg()
-          this.loading = false
+          this.isLoading = false
       })
     },
     handleSelectionChange(val) {
