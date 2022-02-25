@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Index from '../components/main/Index.vue'
 import Audit from '../components/main/Audit.vue'
 import List from '../components/main/List.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,14 @@ const routes = [
     component: Index,
     meta: {
       title: "後台管理系統 - FocusMuscle",
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: "登入 - FocusMuscle後台管理系統",
     }
   },
   {

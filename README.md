@@ -12,10 +12,11 @@ FocusMuscle的後台管理系統
 ```
 ![image](https://github.com/oz841119/focus-muscle-admin/blob/main/ReadmeImage/key.jpg)
 
-## 修正問題
+## 修正
 ```
-1. 0217 - 修正了審核時產生重複多次訊息的BUG
-2. 0217 - 修正了一些複用方法時應該產生的對應訊息框
+1. 修正了審核時產生重複多次訊息的BUG
+2. 修正了一些複用方法時應該產生的對應訊息框
+3. 抽離Header作為單一組件
 
 ```
 ## Project setup

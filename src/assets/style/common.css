@@ -18,3 +18,7 @@ a {
 .mr8 {
   margin-right: 8px;
 }
+
+input:focus-visible {
+  outline: none;
+}
