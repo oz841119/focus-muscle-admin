@@ -6,6 +6,9 @@
     <el-menu-item index="/audit">
       <i class="el-icon-caret-right"></i>動作審核
     </el-menu-item>
+    <el-menu-item>
+      <i class="el-icon-caret-right"></i>COMING SOON
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -18,16 +21,5 @@ export default {
 </script>
 
 <style scoped>
-  /* .aside {
-    box-sizing: border-box;
-    display: flex;
-    padding: 20px 0px;
-    flex-direction: column;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 700;
-  } */
-  .linl {
-    display: block;
-  }
+
 </style>
