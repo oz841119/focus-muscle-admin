@@ -2,15 +2,7 @@
   <div>
     <el-container class="layout">
       <el-header height="60px">
-        <router-link to="/">
-          <div class="title">
-            <div class="imgWrap"><img class="logoIMG" src="../assets/icons/logo.svg"></div>
-            <div class="titleText">
-              <span>FocusMuscle</span>
-              <span>ADMIN</span>
-            </div>
-          </div>
-        </router-link>
+        <HeaderBar/>
       </el-header>
       <el-container>
         <el-aside>
@@ -28,11 +20,13 @@
 
 <script>
 import Aside from '../components/Aside.vue'
+import HeaderBar from '../components/HeaderBar.vue'
 
 export default {
   name: 'home',
   components: {
     Aside,
+    HeaderBar
   }
 }
 </script>
@@ -42,6 +36,7 @@ export default {
   .layout {
     height: 100vh;
   }
+  
   .el-header {
     display: flex;
     align-items: center;
@@ -54,34 +49,8 @@ export default {
     background-color: rgb(40,50,60);
   }
 
-  .title {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  .titleText {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  .imgWrap {
-    display: flex;
-    width: 48px;
-    margin-right: 6px;
-  }
-  
-  .logoIMG {
-    width: 100%;
-  }
-
   .el-main {
-    flex: 7;
-    /* background-color: gold; */
+    flex: 6;
   }
 
 </style>
