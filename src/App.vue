@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- <Home/> -->
-    <Login/>
+    <router-view/>
   </div>
 </template>
 
@@ -9,13 +8,12 @@
 import './assets/style/common.css'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
-
 export default {
   name: 'App',
   components: {
     Home,
-    Login,
-  }
+    Login,  
+  },
 }
 </script>
 

@@ -21,9 +21,10 @@
 <script>
 import Aside from '../components/Aside.vue'
 import HeaderBar from '../components/HeaderBar.vue'
-
 export default {
   name: 'home',
+  created() {
+  },
   components: {
     Aside,
     HeaderBar

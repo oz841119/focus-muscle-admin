@@ -22,3 +22,7 @@ a {
 input:focus-visible {
   outline: none;
 }
+
+.cp {
+  cursor: pointer;
+}
