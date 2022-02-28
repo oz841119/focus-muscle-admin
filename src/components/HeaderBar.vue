@@ -10,7 +10,7 @@
         </div>
       </router-link>
       <div class="rightNav">
-        <div>{{this.$store.state.userEmail}}</div>
+        <div class="email">{{this.$store.state.userEmail}}</div>
         <el-button type="danger"  @click="userSignOut()" class="signOut cp" size="mini">登出</el-button>
       </div>
     </div>
@@ -66,6 +66,10 @@ export default {
   .rightNav {
     display: flex;
     align-items: center;
+  }
+
+  .email {
+    font-family: 'Work Sans', sans-serif;
   }
 
   .signOut {
