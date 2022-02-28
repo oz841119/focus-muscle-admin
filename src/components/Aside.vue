@@ -18,5 +18,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .el-menu {
+    border: none
+  }
 </style>

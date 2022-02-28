@@ -7,7 +7,7 @@
       </div>
     </div>
     <el-row>
-      <el-col :span="2">
+      <el-col :span="3">
         <el-input class="mt8" v-model="searchText" size="mini" placeholder="在列表中搜尋"></el-input>
         </el-col>
     </el-row>
