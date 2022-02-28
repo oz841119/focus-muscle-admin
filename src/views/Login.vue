@@ -40,6 +40,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
     background-color: rgb(30,40,50);
   } 
 </style>

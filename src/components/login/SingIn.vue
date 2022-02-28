@@ -12,7 +12,7 @@
     </form>
     <div class="ps">基於呈現，您可以使用預設的admin登入，也可以註冊新帳號。</div>
     <div class="keepAndForget mt8">
-        <label for="check" class="keepLoginWrap cp"><input type="checkbox" id="check" class="cp"><span class="ml4">保持登入</span></label>
+        <label for="check" class="keepLoginWrap cp"><input type="checkbox" id="check" v-model="isKeepLogin" class="cp"><span class="ml4">保持登入</span></label>
         <div class="forget"  @click="toggleIsForget()">忘記密碼</div>
     </div>
     <div class="login cp" @click="loginAccount()">LOGIN</div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, sendPasswordResetEmail, inMemoryPersistence } from "firebase/auth";
 export default {
   data() {
     return {
@@ -42,7 +42,8 @@ export default {
       emailReg: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
       setTimeout: null, // 保存定時器的標識符 用於調用時清除前次定時器
       isForget: false,
-      isSendMsg: false
+      isSendMsg: false,
+      isKeepLogin: false
     }
   },
   methods: {
@@ -53,13 +54,18 @@ export default {
     loginAccount() {
       if(this.formatCheckFail()) return
       const auth = getAuth()
-      setPersistence(auth, browserLocalPersistence)
+      let keepWork = browserLocalPersistence // 默認用戶的登入狀態保存方式為Local
+      if(!this.isKeepLogin) {
+        keepWork = inMemoryPersistence  // 登入狀態保存方式為不保存
+      }
+      setPersistence(auth, keepWork)
       .then(() => {
         signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           this.$router.push('/')
         })
         .catch((error) => {
+          console.log(error);
           this.errMsg = '錯誤的電子郵件或密碼'
           this.errMsgTO()
         })
@@ -133,8 +139,6 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 26px 40px 50px;
-    width: 30vw;
-    /* height: 50vh; */
     background-color: rgba(255, 255, 255, 0.986);
 
     box-shadow: 5px 5px 5px 1px #242424;
@@ -217,6 +221,7 @@ export default {
     padding: 2px 4px 6px 4px;
     font-size: 14px;
     text-align: center;
+    background-color: rgba(209, 209, 209, 0.699);;
   }
 
   .forgetButtonWrap {

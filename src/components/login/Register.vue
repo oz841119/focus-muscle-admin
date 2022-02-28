@@ -95,7 +95,6 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 26px 40px 50px;
-    width: 30vw;
     background-color: rgba(255, 255, 255, 0.986);
 
     box-shadow: 5px 5px 5px 1px #242424;
