@@ -61,7 +61,6 @@ router.beforeEach(async (to, from, next) => {
     return next({path: 'login'}) 
   }
   if(to.name == 'Login' && user) {
-    console.log('dddd');
     return next({path: '/'})
   }
   next()

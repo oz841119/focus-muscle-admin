@@ -21,13 +21,26 @@
 <script>
 import Aside from '../components/Aside.vue'
 import HeaderBar from '../components/HeaderBar.vue'
+import { getAuth } from "firebase/auth";
 export default {
   name: 'home',
   created() {
+    this.getUser()
   },
   components: {
     Aside,
     HeaderBar
+  },
+  methods: {
+    getUser() {
+      const auth = getAuth()
+      const user = auth.currentUser
+      this.$store.commit('judgeUser', user)
+      this.$message({
+          message: '登入成功',
+          type: 'success'
+        });
+    }
   }
 }
 </script>

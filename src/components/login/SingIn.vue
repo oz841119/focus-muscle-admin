@@ -5,29 +5,74 @@
       <img class="logoIMG" src="../../assets/icons/logo.png">
       <span>LOGIN</span>
     </span>
-    <input type="text" placeholder="ACCOUNT" class="accountInput" v-model="email">
-    <input type="password" placeholder="PASSWORD" class="accountInput mt8" v-model="password">
+    <form action="">
+      <input type="text" placeholder="ACCOUNT" class="accountInput" v-model="email">
+      <input type="password" placeholder="PASSWORD" class="accountInput mt8" v-model="password" autocomplete="on">
+    </form>
     <div class="ps">基於呈現，您可以使用預設的admin登入，也可以註冊新帳號。</div>
     <div class="keepAndForget mt8">
         <label for="check" class="keepLoginWrap cp"><input type="checkbox" id="check" class="cp"><span class="ml4">保持登入</span></label>
         <div class="forget">忘記密碼</div>
     </div>
-    <div class="login cp" @click="fn()">LOGIN</div>
+    <div class="login cp" @click="loginAccount()">LOGIN</div>
     <div class="register cp" @click="toggleRegisterPage()">REGISTER</div>
   </div>
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 export default {
   data() {
     return {
       email: 'admin@nothing.com',
-      password: 'adminpassword'
+      password: 'adminpassword',
+      errMsg: '',
+      emailReg: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
+      setTimeout: null // 保存定時器的標識符 用於調用時清除前次定時器
     }
   },
   methods: {
     toggleRegisterPage() {
       this.$emit('toggleRegisterPage')
+    },
+
+    loginAccount() {
+      if(this.formatCheckFail()) return
+      const auth = getAuth()
+      setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        signInWithEmailAndPassword(auth, this.email, this.password)
+        .then(() => {
+          this.$router.push('/')
+        })
+      })
+    },
+
+    formatCheckFail() {
+      if(!this.email || !this.password) {
+        this.errMsg = '表單未填寫完整'
+        this.errMsgTO()
+        return true
+      }
+
+      if(this.password.length < 6) {
+        this.errMsg = '密碼長度須大於6位'
+        this.errMsgTO()
+        return true
+      }
+
+      if(!this.emailReg.test(this.email)) {
+        this.errMsg = '電子信箱輸入不正確，請重新輸入'
+        this.errMsgTO()
+        return true
+      }
+
+    },
+    errMsgTO() {
+      clearTimeout(this.timeOutId)
+      this.timeOutId = setTimeout(() => {
+        this.errMsg = ''
+      }, 3000)
     }
   }
 }

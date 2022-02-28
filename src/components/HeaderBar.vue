@@ -9,9 +9,9 @@
           </div>
         </div>
       </router-link>
-      <div>
+      <div class="rightNav">
         <div>{{this.$store.state.userEmail}}</div>
-        <div @click="userSignOut()">登出</div>
+        <el-button type="danger"  @click="userSignOut()" class="signOut cp" size="mini">登出</el-button>
       </div>
     </div>
 </template>
@@ -23,7 +23,6 @@ export default {
     userSignOut() {
       const auth = getAuth()
       signOut(auth).then(() => {
-        console.log('登出');
         this.$router.push('/login')
       })
     }
@@ -62,5 +61,14 @@ export default {
   
   .logoIMG {
     width: 100%;
+  }
+
+  .rightNav {
+    display: flex;
+    align-items: center;
+  }
+
+  .signOut {
+    margin-left: 30px;
   }
 </style>
