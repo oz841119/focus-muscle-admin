@@ -93,8 +93,18 @@ export default {
       方法待重寫 過多冗余  且有重複名稱的訓練動作會被一起刪除的問題
     */ 
     deleteData() {
+      console.log(this.multipleSelection.length);
+      console.log(this.$store.state.userEmail !== 'oz841119@gmail.com');
       if(this.multipleSelection.length == 0) {
         this.$message('您沒有列表勾選');
+        return
+      }
+
+      if(this.multipleSelection.length >= 3 && this.$store.state.userEmail !== 'oz841119@gmail.com') {
+        this.$message({
+          message: '抱歉，避免手誤，您的帳號最多一次性刪除兩個動作',
+          type: 'error'
+        })
         return
       }
       this.isLoading = true
