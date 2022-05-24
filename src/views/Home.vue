@@ -10,6 +10,7 @@
         </el-aside>
         <el-main>
           <keep-alive>
+            Updata: 0524
             <router-view/>
           </keep-alive>
         </el-main>
